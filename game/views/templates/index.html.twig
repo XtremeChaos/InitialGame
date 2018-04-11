@@ -1,0 +1,85 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+    <h3>Jocul Emagia</h3>
+    <h4>Statusul echipelor la inceputul jocului</h4>
+    {% for start_stat in start_stats %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Echipa {{ start_stat.team }}</h3>
+        </div>
+    </div>
+    <div class="row">
+    {% for fighter in start_stat.fighters %}
+        <div class="col-sm-4">
+            <p><b>Nume: {{ fighter.name }}</b></p>
+            <p>Viata: {{ fighter.health }}</p>
+            <p>Viata Ramasa: {{ fighter.health_remained }}</p>
+            <p>Putere: {{ fighter.strength }}</p>
+            <p>Aparare: {{ fighter.defence }}</p>
+            <p>Viteza: {{ fighter.speed }}</p>
+            <p>Noroc: {{ fighter.luck }}</p>
+            {% if fighter.skills|length > 0 %}
+            <p>Abilitati:
+                <ul>
+                    {% for skill in fighter.skills %}
+                    <li>
+                        <span>Nume: {{ skill.name }}</span><br/>
+                        <span>Tip: {{ skill.type }}</span><br/>
+                        <span>Sansa: {{ skill.chance }}</span><br/>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </p>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+    {% endfor %}
+
+    <h4>Desfasurare Lupta:</h4>
+    <ul>
+        {% for log in logs %}
+            <li>{{ log }}</li>
+        {% endfor %}
+    </ul>
+
+    <h4>Statusul echipelor la finalul jocului</h4>
+    {% for end_stat in end_stats %}
+        <div class="row">
+            <div class="col-xs-12">
+                {% if end_stat.fighters|length > 0 %}
+                    <h3>Echipa {{ end_stat.team }}</h3>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            {% for fighter in end_stat.fighters %}
+                <div class="col-sm-4">
+                    <p><b>Nume: {{ fighter.name }}</b></p>
+                    <p>Viata: {{ fighter.health }}</p>
+                    <p>Viata Ramasa: {{ fighter.health_remained }}</p>
+                    <p>Putere: {{ fighter.strength }}</p>
+                    <p>Aparare: {{ fighter.defence }}</p>
+                    <p>Viteza: {{ fighter.speed }}</p>
+                    <p>Noroc: {{ fighter.luck }}</p>
+                    {% if fighter.skills|length > 0 %}
+                        <p>Abilitati:
+                        <ul>
+                            {% for skill in fighter.skills %}
+                                <li>
+                                    <span>Nume: {{ skill.name }}</span><br/>
+                                    <span>Tip: {{ skill.type }}</span><br/>
+                                    <span>Sansa: {{ skill.chance }}</span><br/>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        </p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+{% endblock %}

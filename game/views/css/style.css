@@ -1,0 +1,9 @@
+body{
+    color: #FFF;
+    background-image: url(../img/wallpaper.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+p{
+    margin: 0;
+}
